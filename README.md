@@ -1,4 +1,4 @@
 jhtdb.cisc2015
 ==============
 
-CISC 2015 Article describing JHTDB
+CISE 2015 Article describing JHTDB
