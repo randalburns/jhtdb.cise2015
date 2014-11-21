@@ -167,6 +167,12 @@ centered on the target location) as a kernel. The size of each kernel depends on
 Additionally, given a size of $8^3$ data points for a data atom, each record fits within a single database page. This allows us to obtain the data for each
 computation with a small number of I/Os.
 
+\begin{figure*}
+\includegraphics[width=1.0\textwidth]{ip_map.png}
+\caption{Origin location of queries to the JHTDB and total number of points queried per IP address.}
+\label{fig:ip_map}
+\end{figure*}
+
 The database atoms are indexed and distributed across the nodes of the database cluster by means of the Morton z-order space-filling curve (Z-curve). The 
 Z-curve maps the 3D data to the one dimensional index space. It passes through each location in space once and only once, it is easy to compute and
 provides good spatial locality. Spatial locality is important as data points in close proximity in physical space are usually accessed at the same time for the
@@ -213,15 +219,8 @@ results and enables users to come back to the same place in space and time. The 
 the same exact data, but users can look at it from different angles, requesting derivatives, spatially filter the data or compute more complicated quantities. 
 This builds physical intuition about the nonlinear dynamics of the complex flow phenomena and can lead to new discoveries. 
 
-The availability of an open numerical laboratory for the study of turbulent flows has already had a major impact on turbulence research and education. 
-The JHTDB has over 150 registered users and queries have been made from over 1500 distinct ip addresses across the globe.
-Data from the service have been used fully or partially in multiple research projects resulting in at least 40 peer-reviewed publications. ({\color{red} summarize
-research results?}). The impact of the JHDTB has extended to the classroom as well. The laboratory has been used in various classes and student workshops 
-around the world (e.g. the ``Tutorial School on Fluid Dynamics: Topics in Turbulence" held at the University of Maryland College Park - 
-see http://www2.cscamm.umd.edu/programs/trb10/, to be repeated in the summer of 2015).
-
 \begin{figure}
-\includegraphics[width=0.6\textwidth]{jhtdb_usage.png}
+\includegraphics[width=0.5\textwidth]{jhtdb_usage.png}
 \caption{Number of points queried from the JHTDB per year.}
 \label{fig:points_queried}
 \end{figure}
@@ -231,6 +230,13 @@ see http://www2.cscamm.umd.edu/programs/trb10/, to be repeated in the summer of 
 \caption{Matlab script to examine the vorticity magnitude around a point with large vorticity in the isotropic turbulence dataset stored in the JHTDB.}
 \label{fig:vorticity}
 \end{figure*}
+
+The availability of an open numerical laboratory for the study of turbulent flows has already had a major impact on turbulence research and education. 
+The JHTDB has over 150 registered users and queries have been made from over 1500 distinct ip addresses across the globe (Fig. \ref{fig:ip_map}).
+Data from the service have been used fully or partially in multiple research projects resulting in at least 40 peer-reviewed publications. ({\color{red} summarize
+research results?}). The impact of the JHDTB has extended to the classroom as well. The laboratory has been used in various classes and student workshops 
+around the world (e.g. the ``Tutorial School on Fluid Dynamics: Topics in Turbulence" held at the University of Maryland College Park - 
+see http://www2.cscamm.umd.edu/programs/trb10/, to be repeated in the summer of 2015).
 
 JHTDB usage has grown steadily over the years with the addition of new datasets and expanded capabilities and performance. Figure \ref{fig:points_queried}
 shows the total number of points queried per year since the JHTDB's inception in 2007. The MHD dataset was released in 2011, the channel flow dataset
@@ -254,6 +260,20 @@ Web-service method) at each of these locations and computes and plots the vortic
 getThreshold and getVelocityGradient methods can be further analyzed depending on the particular needs of the user.
 
 \section{Conclusion}
+We have described an open numerical laboratory for the study of turbulent phenomena, the JHTDB. It provides public access to high-quality turbulence 
+numerical simulation data along with built-in analysis functionality. Scientists and the public as a whole can immerse sensors in the simulated flows, study
+their evolution or the flow parameters. This can and has been done from around the world by researches that don't have access to supercomputing facilities
+and/or large amounts of local storage and computational resources. The JHTDB is the manifestation of the ``remote immersive analysis" approach to 
+computational science.
+
+In the future we plan on expanding the capabilities of the JHTDB through adding interactive visualization capabilities, custom server side computations and
+the ability	to generate and store derived datasets. Visualization software will run in server
+mode on our servers and will allow remote client connections. We are also exploring Web interfaces for such visualization software, which will allow users
+to perform visualizations through a Web-browser. By integrating the JHTDB with existing technology developed for the Sloan Digital Sky Survey (SDSS), such
+as CasJob and MyDB \cite{LiThakar} we will be able to provide server-side storage for our users. The results of data-intensive computations and iterative 
+workflows can be stored in this server-side storage to be downloaded or interacted with later. This will also allow for the generation of derived datasets (e.g.
+filtered versions of the original datasets), which can then be used through the existing Web-services. This will also allow for interacting with the data in new
+and different ways.
 
 \vfill
 \newpage
