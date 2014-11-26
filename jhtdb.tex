@@ -3,7 +3,7 @@
 \geometry{letterpaper} 
 \usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line
 \usepackage{wrapfig}
-\usepackage{graphicx}
+\usepackage{graphicx,subfigure}
 \usepackage{amssymb}
 \usepackage{epstopdf}
 \usepackage{subfigure}
@@ -214,6 +214,14 @@ Thus, the threshold query result cache is also distributed across the database n
 
 \section{Impact of the JHTDB}
 
+\begin{figure*}
+\centering
+\subfigure[Number of queries]{\includegraphics[width=0.49\textwidth]{jhtdb_queries.pdf}\label{fig:queries}}
+\subfigure[Number of data points queried]{\includegraphics[width=0.49\textwidth]{jhtdb_usage.pdf}\label{fig:points_queried}}
+\caption{Semi-log plot of the number of queries and number of data points queried from the JHTDB per year.}
+\label{fig:usage}
+\end{figure*}
+
 As of the writing of this article the JHTDB has served queries to nearly 10 trillion data points. This serves as a testament to the demand for such high-quality
 data and their potential for reusability. Each of the four datasets stored in the JHTDB currently has on the order of a trillion space-time data points. Storing
 these data in an open numerical laboratory preserves the computational effort used to generate them, allows for repeatability of experiments and verification of
@@ -221,18 +229,20 @@ results and enables users to come back to the same place in space and time. The 
 the same exact data, but users can look at it from different angles, requesting derivatives, spatially filter the data or compute more complicated quantities. 
 This builds physical intuition about the nonlinear dynamics of the complex flow phenomena and can lead to new discoveries. 
 
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{jhtdb_queries.pdf}
-\caption{Semi-log plot of the number of queries submitted and evaluated by the JHTDB per year.}
-\label{fig:queries}
-\end{figure}
-
 The availability of an open numerical laboratory for the study of turbulent flows has already had a major impact on turbulence research and education. 
 The JHTDB has over 150 registered users and queries have been made from over 1500 distinct ip addresses across the globe (Fig. \ref{fig:ip_map}).
 Data from the service have been used fully or partially in multiple research projects resulting in at least 40 peer-reviewed publications. ({\color{red} summarize
 research results?}). The impact of the JHDTB has extended to the classroom as well. The laboratory has been used in various classes and student workshops 
 around the world (e.g. the ``Tutorial School on Fluid Dynamics: Topics in Turbulence" held at the University of Maryland College Park - 
 see http://www2.cscamm.umd.edu/programs/trb10/, to be repeated in the summer of 2015).
+
+\begin{figure*}
+\centering
+\subfigure[Percentage of queries per query type]{\includegraphics[width=0.49\textwidth]{jhtdb_query_types.pdf}\label{fig:queries_per_type}}
+\subfigure[Percentage of data points queried per query type]{\includegraphics[width=0.49\textwidth]{jhtdb_total_per_query_type.pdf}\label{fig:points_per_type}}
+\caption{Distribution of JHTDB queries and number of data points queried per query type.}
+\label{fig:query_types}
+\end{figure*}
 
 JHTDB usage has grown steadily over the years with the addition of new datasets and expanded capabilities and performance. Figure \ref{fig:points_queried}
 shows the total number of points queried per year since the JHTDB's inception in 2007 and the total number of queries submitted is shown in Figure
@@ -244,17 +254,12 @@ in 2012 the data cutout service went online. This new functionality has greatly 
 track particles is much more efficiently executed near the data. On the other hand, the cutout service has provided an easy and efficient way for researchers to
 obtain the raw simulation data if they so choose. 
 
-\begin{figure}
-\includegraphics[width=0.5\textwidth]{jhtdb_usage.pdf}
-\caption{Semi-log plot of the number of points queried from the JHTDB per year.}
-\label{fig:points_queried}
-\end{figure}
-
-\begin{figure*}
-\includegraphics[width=1.0\textwidth]{vorticity.png}
-\caption{Matlab script to examine the vorticity magnitude around a point with large vorticity in the isotropic turbulence dataset stored in the JHTDB.}
-\label{fig:vorticity}
-\end{figure*}
+Most queries submitted and evaluated by the JHTDB request the simulation field parameters and their spatial derivatives as can be seen in Figure
+\ref{fig:queries_per_type}. The number of requests made through the cutout service is significantly smaller. However, in terms of the actual size of the requests
+and the total amount of data retrieved, the cutout requests are a much larger slice of the pie as seen in Figure \ref{fig:points_per_type}. The recently introduced
+threshold queries are another example of an extremely data-intensive task, which is efficiently performed by the database cluster. A single request for the 
+number of points above a particular threshold usually examines up to the entire $1024^3$ or larger data volume of a simulation time-step. 
+There have been only $\sim2000$ such queries executed so far, and yet over 1 trillion points have been examined by this query type alone.
 
 \section{Immersive turbulence}
 Using the JHTDB and accompanying access libraries and tools, scientists can immerse virtual sensors in the simulation, visualize turbulent phenomena, 
@@ -262,6 +267,12 @@ perform feature extraction and data mining. The data and the associated function
 to interact with the entire simulation data. Stationary sensors immersed in the flow report the simulation parameters or values of derived fields at particular 
 locations, while particles can be allowed to flow both forward and backward in time along pathlines or along streamlines within a single time-step. 
 We term this approach to computational science ``remote immersive analysis".
+
+\begin{figure*}
+\includegraphics[width=1.0\textwidth]{vorticity.png}
+\caption{Matlab script to examine the vorticity magnitude around a point with large vorticity in the isotropic turbulence dataset stored in the JHTDB.}
+\label{fig:vorticity}
+\end{figure*}
 
 Figure \ref{fig:vorticity} shows an example of the remote immersive analysis approach to computational turbulence. The user extracts all locations within the
 region of interest where the magnitude of the vorticity is above a prescribed threshold (65.0 in the example) from the isotropic turbulence dataset (making 
