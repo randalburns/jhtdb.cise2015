@@ -220,16 +220,10 @@ the same exact data, but users can look at it from different angles, requesting 
 This builds physical intuition about the nonlinear dynamics of the complex flow phenomena and can lead to new discoveries. 
 
 \begin{figure}
-\includegraphics[width=0.5\textwidth]{jhtdb_usage.pdf}
-\caption{Number of points queried from the JHTDB per year.}
-\label{fig:points_queried}
+\includegraphics[width=0.5\textwidth]{jhtdb_queries.pdf}
+\caption{Semi-log plot of the number of queries submitted and evaluated by the JHTDB per year.}
+\label{fig:queries}
 \end{figure}
-
-\begin{figure*}
-\includegraphics[width=1.0\textwidth]{vorticity.png}
-\caption{Matlab script to examine the vorticity magnitude around a point with large vorticity in the isotropic turbulence dataset stored in the JHTDB.}
-\label{fig:vorticity}
-\end{figure*}
 
 The availability of an open numerical laboratory for the study of turbulent flows has already had a major impact on turbulence research and education. 
 The JHTDB has over 150 registered users and queries have been made from over 1500 distinct ip addresses across the globe (Fig. \ref{fig:ip_map}).
@@ -239,11 +233,26 @@ around the world (e.g. the ``Tutorial School on Fluid Dynamics: Topics in Turbul
 see http://www2.cscamm.umd.edu/programs/trb10/, to be repeated in the summer of 2015).
 
 JHTDB usage has grown steadily over the years with the addition of new datasets and expanded capabilities and performance. Figure \ref{fig:points_queried}
-shows the total number of points queried per year since the JHTDB's inception in 2007. The MHD dataset was released in 2011, the channel flow dataset
+shows the total number of points queried per year since the JHTDB's inception in 2007 and the total number of queries submitted is shown in Figure
+\ref{fig:queries}. As we can see there has been an exponential growth in the total number of data points queried over the past several years, mainly due to
+new access methods, increased number of analysis functionalities and the addition of new datasets. 
+The MHD dataset was released in 2011, the channel flow dataset
 became public in 2013 and the mixing dataset was released in 2014. In 2011 the particle tracking functionality was implemented and made available, while
 in 2012 the data cutout service went online. This new functionality has greatly increased the utility of the service. The data-intensive iterative process used to
 track particles is much more efficiently executed near the data. On the other hand, the cutout service has provided an easy and efficient way for researchers to
 obtain the raw simulation data if they so choose. 
+
+\begin{figure}
+\includegraphics[width=0.5\textwidth]{jhtdb_usage.pdf}
+\caption{Semi-log plot of the number of points queried from the JHTDB per year.}
+\label{fig:points_queried}
+\end{figure}
+
+\begin{figure*}
+\includegraphics[width=1.0\textwidth]{vorticity.png}
+\caption{Matlab script to examine the vorticity magnitude around a point with large vorticity in the isotropic turbulence dataset stored in the JHTDB.}
+\label{fig:vorticity}
+\end{figure*}
 
 \section{Immersive turbulence}
 Using the JHTDB and accompanying access libraries and tools, scientists can immerse virtual sensors in the simulation, visualize turbulent phenomena, 
