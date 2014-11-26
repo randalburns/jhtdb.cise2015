@@ -168,7 +168,7 @@ Additionally, given a size of $8^3$ data points for a data atom, each record fit
 computation with a small number of I/Os.
 
 \begin{figure*}
-\includegraphics[width=1.0\textwidth]{ip_map.pdf}
+\frame{\includegraphics[width=1.0\textwidth]{ip_map.pdf}}
 \caption{Origin location of queries to the JHTDB and total number of points queried per IP address.}
 \label{fig:ip_map}
 \end{figure*}
@@ -197,10 +197,12 @@ in a cache database, which resides on solid-state drives (SSDs) attached to each
 if they specify the same or higher threshold, are within the same spatial region and are querying the same dataset, field, time-step.
 
 The JHTDB also provides a cutout service, which allows users to obtain the raw simulation data in familiar HDF5 format. The cutout service includes an
-option to obtain the raw data by specifying a stride or a step. In that case a coarser version of the data are produced using a box filter. For reasonable
-values of the stride parameter it is just as fast to produce a filtered version of the data as it is to obtain the raw data through strided access.  This is because
-the access is limited by I/O, the filtering computation introduces negligible overhead ({\color{red} should we add a figure?}) and the final limiting factor of
-transferring the results to the user is the network speed.
+option to obtain the raw data by specifying a stride or a step and optionally a filter width. 
+In that case a coarser version of the data are produced and if the filter width is larger than a single data point the data are filtered using a box filter. 
+For reasonable values of the stride parameter producing a filtered version of the data is only slightly slower than obtaining the raw data through strided access.  
+This is because the access is limited by I/O and the transfer of results to the user is limited by network speed. 
+The filtering computation introduces a small overhead mainly due to the fact that the data have to be converted
+from binary to single precious floating point format to perform the filtering computations.
 
 The evaluation of all queries submitted to the JHTDB is distributed across the nodes of the database cluster and we create multiple connections to each
 node in order to exploit the nodes' multicore architecture. The Web-server handling a user request acts as a mediator. It distributes the input across the
