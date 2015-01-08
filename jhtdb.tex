@@ -153,7 +153,7 @@ functionality provided to the users should also be general enough to allow for d
 With these considerations in mind, we have developed Web-services methods that evaluate simulation parameters on a set of target locations. Users of 
 the JHTDB can request the following:
 \begin{itemize}
-\item values of the simulation fields on and off the grid, locations off the grid are interpolated using Lagrange and b-spline polynomials of varying orders;
+\item values of the simulation fields on and off the grid, locations off the grid are interpolated using Lagrange and spline polynomials of varying orders;
 \item first and second order derivatives of the simulation fields evaluated using finite-differencing schemes of varying orders;
 \item filtered quantities, such as the filtered velocity, filtered velocity gradient, sub-grid stress tensor, etc., filtering is performed using a box filter;
 \item the positions of particles tracking the simulated flow, particle tracking is performed using a second order accurate Runge-Kutta integration scheme;
@@ -168,8 +168,8 @@ Additionally, given a size of $8^3$ data points for a data atom, each record fit
 computation with a small number of I/Os.
 
 \begin{figure*}
-\frame{\includegraphics[width=1.0\textwidth]{ip_map.pdf}}
-\caption{Origin location of queries to the JHTDB and total number of points queried per IP address.}
+\frame{\includegraphics[width=1.0\textwidth]{ip_map.png}}
+\caption{Origin location of queries to the JHTDB and total number of points queried per IP address in log scale.}
 \label{fig:ip_map}
 \end{figure*}
 
@@ -184,7 +184,7 @@ linear-sums \cite{KanovSC11}. In this framework a batch query consisting of mult
 the data. Each computation of a linear-sum can be broken down into partial-sums, which allows us to use an I/O stream, without having to do random 
 accesses or keep a large amount of data in memory. The I/O streaming framework is used for the evaluation of interpolation, differentiation and filtering.
 
-In the case of spatial filtering, for certain workloads further optimizations of the evaluation strategy are possible. Workloads that distributed target locations
+In the case of spatial filtering, for certain workloads further optimizations of the evaluation strategy are possible. Workloads that distribute target locations
 densely in space and specify large filter widths share not only data, but also computation. A box filter is evaluated by computing the average of all data
 points within the filter kernel, which of course makes use of the sum of all data points within the kernel. Therefore, precomputing these sums allows us to
 evaluate the box filter at each target location by looking up only eight points in the precomputed ``summed-volumes" dataset \cite{KanovSC12}.
