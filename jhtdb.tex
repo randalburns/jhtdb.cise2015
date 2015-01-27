@@ -62,7 +62,7 @@
 \newcommand{\ral}{\rangle}
 
 \title{\Large \bf \color{bl} The Johns Hopkins Turbulence Databases, an Open Numerical Laboratory for Turbulence Research} 
-\author{\bf Kalin Kanov \& Randal Burns} 
+\author{\bf Kalin Kanov, Randal Burns, Cristian Lalescu \& Gregory Eyink} 
 \baselineskip=.18in
   
 \twocolumn[\maketitle]
@@ -70,7 +70,7 @@
 \setcounter{page}{1}
 
 The Johns Hopkins Turbulence Databases are an open numerical laboratory for the study of turbulence. They provide an immersive environment, in which
-world-class numerical simulation datasets are available "at your fingertips". Such an environment has the potential to transform our understanding of
+world-class numerical simulation datasets are available ``at your fingertips". Such an environment has the potential to transform our understanding of
 turbulent flows.
 
  
@@ -90,14 +90,14 @@ and time in the domain of the simulation.
 The memory and computational requirements of DNS of turbulence scale as the third and fourth power of the
 non-dimensional Reynolds number, \emph{Re} \cite{Lee}. Turbulent flows of practical interest usually have high
 \emph{Re}, and must therefore be solved using supercomputers. Preparing and running such a simulation requires substantial expertise in parallel
-computing and turbulence research, but moreover it requires access to a supercomputing facility. Traditionally such undertakings have been team 
+computing and turbulence research, but moreover it requires access to a supercomputing facility. Traditionally, such undertakings have been team 
 efforts that are planned and prepared for ahead of time, the particular science questions to be answered have been thought of in advance and most of the
 analysis is done during the simulation. Only representative snapshots are stored for subsequent analysis and even if more data are available accessing
 them is often not easy and usually entails the downloading of large amounts of data to a local machine. In order to provide access to high-quality
 world-class turbulence DNS data to researchers that may not have access to supercomputing facilities and the public as a whole, our group at Johns 
 Hopkins has developed an open turbulence laboratory, the Johns Hopkins Turbulence Databases (JHTDB). 
 
-Here, we describe our experience building and operating the JHTDB and our efforts to provide "at your fingertips" access to terabyte simulation datasets
+Here, we describe our experience building and operating the JHTDB and our efforts to provide ``at your fingertips" access to terabyte simulation datasets
 to anyone in the world with an internet connection. An open numerical laboratory complements the DNS approach to the study of turbulence. The entire
 space-time history of landmark simulations are stored persistently in a database cluster. Coupled with built-in analysis functionality this allows researchers
 with modest computational and storage capabilities to perform sophisticated analysis using high-resolution datasets, traverse the flow both forward and
@@ -153,11 +153,11 @@ functionality provided to the users should also be general enough to allow for d
 With these considerations in mind, we have developed Web-services methods that evaluate simulation parameters on a set of target locations. Users of 
 the JHTDB can request the following:
 \begin{itemize}
-\item values of the simulation fields on and off the grid, locations off the grid are interpolated using Lagrange and spline polynomials of varying orders;
+\item values of the simulation fields on and off the grid (locations off the grid are interpolated using Lagrange and spline polynomials of varying orders);
 \item first and second order derivatives of the simulation fields evaluated using finite-differencing schemes of varying orders;
-\item filtered quantities, such as the filtered velocity, filtered velocity gradient, sub-grid stress tensor, etc., filtering is performed using a box filter;
-\item the positions of particles tracking the simulated flow, particle tracking is performed using a second order accurate Runge-Kutta integration scheme;
-\item all values of the simulation fields and derived quantities above a prescribed threshold, derived quantities currently include the vorticity and Q-criterion.
+\item filtered quantities, such as the filtered velocity, filtered velocity gradient, sub-grid stress tensor, etc. (filtering is performed using a box filter);
+\item the positions of particles tracking the simulated flow (particle tracking is performed using a second order accurate Runge-Kutta integration scheme);
+\item all values of the simulation fields and derived quantities above a prescribed threshold (derived quantities currently include the vorticity and Q-criterion).
 \end{itemize}
 
 In order to amortize I/O, improve the specificity of reads and reduce the overhead of indexing the data, we partition the data into data cubes or ``atoms".
@@ -169,7 +169,7 @@ computation with a small number of I/Os.
 
 \begin{figure*}
 \frame{\includegraphics[width=1.0\textwidth]{ip_map.pdf}}
-\caption{Origin location of queries to the JHTDB and total number of points queried per IP address in log scale.}
+\caption{Origin location of queries to the JHTDB. Each IP address location is colored based on the total number of points queried in log scale.}
 \label{fig:ip_map}
 \end{figure*}
 
@@ -194,7 +194,7 @@ entire simulation time-step and produce only the points, whose values are above 
 that scientists are usually interested in not just the simulation fields, but also derived fields, such as the vorticity, electric current, second and third invariants
 of the velocity gradient and others. In order to preserve the computational effort of the evaluation of threshold queries of derived fields we store their results
 in a cache database, which resides on solid-state drives (SSDs) attached to each database node. Subsequent queries can be answered from the cache
-if they specify the same or higher threshold, are within the same spatial region and are querying the same dataset, field, time-step.
+if they specify the same or higher threshold, are within the same spatial region and are querying the same dataset, field and time-step.
 
 The JHTDB also provides a cutout service, which allows users to obtain the raw simulation data in familiar HDF5 format. The cutout service includes an
 option to obtain the raw data by specifying a stride or a step and optionally a filter width. 
@@ -222,7 +222,7 @@ Thus, the threshold query result cache is also distributed across the database n
 \label{fig:usage}
 \end{figure*}
 
-As of the writing of this article the JHTDB has served queries to nearly 10 trillion data points. This serves as a testament to the demand for such high-quality
+As of the writing of this article the JHTDB has served queries to nearly 12 trillion data points. This serves as a testament to the demand for such high-quality
 data and their potential for reusability. Each of the four datasets stored in the JHTDB currently has on the order of a trillion space-time data points. Storing
 these data in an open numerical laboratory preserves the computational effort used to generate them, allows for repeatability of experiments and verification of
 results and enables users to come back to the same place in space and time. The continued exploration of the same place in space and time produces
@@ -231,8 +231,7 @@ This builds physical intuition about the nonlinear dynamics of the complex flow 
 
 The availability of an open numerical laboratory for the study of turbulent flows has already had a major impact on turbulence research and education. 
 The JHTDB has over 150 registered users and queries have been made from over 1500 distinct ip addresses across the globe (Fig. \ref{fig:ip_map}).
-Data from the service have been used fully or partially in multiple research projects resulting in at least 40 peer-reviewed publications. ({\color{red} summarize
-research results?}). The impact of the JHDTB has extended to the classroom as well. The laboratory has been used in various classes and student workshops 
+Data from the service have been used fully or partially in multiple research projects resulting in at least 40 peer-reviewed publications. The impact of the JHDTB has extended to the classroom as well. The laboratory has been used in various classes and student workshops 
 around the world (e.g. the ``Tutorial School on Fluid Dynamics: Topics in Turbulence" held at the University of Maryland College Park - 
 see http://www2.cscamm.umd.edu/programs/trb10/, to be repeated in the summer of 2015).
 
@@ -280,6 +279,15 @@ a call to the getThreshold Web-service method). He or she then generates a 2D pl
 ``virtual sensors" at each location using the dataset's gird spacing. He or she then requests the velocity gradient (making a call to the getVelocityGradient
 Web-service method) at each of these locations and computes and plots the vorticity magnitude to yield the visualization shown. The results of the 
 getThreshold and getVelocityGradient methods can be further analyzed depending on the particular needs of the user.
+
+Many numerical simulations are canonical and have useful lifetimes of years or decades. Turbulence researchers have come to rely on the JHTDB to 
+provide such canonical datasets and new ideas are tested on the service routinely. The scientific results that have emerged span the full breadth of 
+turbulence research. For example, a generalization of previous models of turbulent dispersion was 
+first applied to JHTDB data by Benveniste et al. \cite{benveniste2014asymptotic}. Luethi et al. \cite{luethi2009expanding} have used the JHTDB to develop
+a better understanding of velocity gradient dynamics. Pumir et al. \cite{pumir2014redistribution} drew the
+conclusion that ``pressure forces tend, on average, to accelerate
+fast particles" by utilizing the the tools and data provided by the JHTDB. These are just a handful of the many examples showing the utility of the 
+JHTDB and how it has enabled data-driven discovery.
 
 \section{Conclusion}
 We have described an open numerical laboratory for the study of turbulent phenomena, the JHTDB. It provides public access to high-quality turbulence 
