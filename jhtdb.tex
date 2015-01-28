@@ -61,7 +61,7 @@
 \newcommand{\lal}{\langle}
 \newcommand{\ral}{\rangle}
 
-\title{\Large \bf \color{bl} The Johns Hopkins Turbulence Databases, an Open Numerical Laboratory for Turbulence Research} 
+\title{\Large \bf \color{bl} The Johns Hopkins Turbulence Databases, an Open Simulation Laboratory for Turbulence Research} 
 \author{\bf Kalin Kanov, Randal Burns, Cristian Lalescu \& Gregory Eyink} 
 \baselineskip=.18in
   
@@ -69,7 +69,7 @@
 
 \setcounter{page}{1}
 
-The Johns Hopkins Turbulence Databases are an open numerical laboratory for the study of turbulence. They provide an immersive environment, in which
+The Johns Hopkins Turbulence Databases are an open simulation laboratory for the study of turbulence. They provide an immersive environment, in which
 world-class numerical simulation datasets are available ``at your fingertips". Such an environment has the potential to transform our understanding of
 turbulent flows.
 
@@ -98,19 +98,20 @@ world-class turbulence DNS data to researchers that may not have access to super
 Hopkins has developed an open turbulence laboratory, the Johns Hopkins Turbulence Databases (JHTDB). 
 
 Here, we describe our experience building and operating the JHTDB and our efforts to provide ``at your fingertips" access to terabyte simulation datasets
-to anyone in the world with an internet connection. An open numerical laboratory complements the DNS approach to the study of turbulence. The entire
+to anyone in the world with an internet connection. An open simulation laboratory complements the DNS approach to the study of turbulence. The entire
 space-time history of landmark simulations are stored persistently in a database cluster. Coupled with built-in analysis functionality this allows researchers
 with modest computational and storage capabilities to perform sophisticated analysis using high-resolution datasets, traverse the flow both forward and
 backward in time, repeat and refine experiments, tune the parameters of their analysis routines, test new hypothesis and use the data in ways, which were 
-not even envisioned when the simulations were run. Additionally, an open numerical laboratory can be used for teaching and training the next generation 
+not even envisioned when the simulations were run. Additionally, an open simulation laboratory can be used for teaching and training the next generation 
 of researchers.
 
-The deployment of an open numerical laboratory for turbulence research has already transformed our understanding of turbulence and has allowed for new
+The deployment of an open simulation laboratory for turbulence research has already transformed our understanding of turbulence and has allowed for new
 types of analysis to be performed in this environment. Particles immersed in the simulated flow can be tracked both forward an backward in time. 
 Ensembles of particles are evaluated together and the experiments can be repeated multiple times to achieve the required confidence in the results.
-Analysis of this type in magnetohydrodynamics (MHD), where stochastic trajectories arriving at a point $(x, t)$ where traced backward in time to the initial 
-time, $t_0$ and the magnetic field was then transported forward along the trajectories to the point $(x, t)$ has revealed why  solar flares break and reconnect 
-in as little as 15 minutes as opposed to the millions of years predicted by classical theory \cite{Eyink}.
+Analysis of this type was carried out in magnetohydrodynamics (MHD), where stochastic trajectories arriving at a point $(x, t)$ were traced backward in 
+time to the initial time, $t_0$ and the magnetic field was then transported forward along the trajectories to the point $(x, t)$. This numerical experiment has
+revealed why magnetic field-lines in solar flares break and reconnect in as little as 15 minutes as opposed to the millions of years predicted by classical 
+theory \cite{Eyink}.
 
 The great advances in computing capabilities of the recent past have led to scientific datasets of unprecedented size. The standard DNS of turbulent flows
 produce datasets that are 10s to 100s of terabytes, while leading-edge simulations have already crossed the petabyte threshold \cite{Lee}. The rate at
@@ -224,14 +225,18 @@ Thus, the threshold query result cache is also distributed across the database n
 
 As of the writing of this article the JHTDB has served queries to nearly 12 trillion data points. This serves as a testament to the demand for such high-quality
 data and their potential for reusability. Each of the four datasets stored in the JHTDB currently has on the order of a trillion space-time data points. Storing
-these data in an open numerical laboratory preserves the computational effort used to generate them, allows for repeatability of experiments and verification of
-results and enables users to come back to the same place in space and time. The continued exploration of the same place in space and time produces
-the same exact data, but users can look at it from different angles, requesting derivatives, spatially filter the data or compute more complicated quantities. 
+these data in an open simulation laboratory preserves the computational effort used to generate them, allows for repeatability of experiments and 
+verification of results and enables users to come back to the same place in space and time. The continued exploration of the same place in space and 
+time produces the same exact data, but users can look at it from different angles, requesting derivatives, spatially filter the data or compute more 
+complicated quantities. 
 This builds physical intuition about the nonlinear dynamics of the complex flow phenomena and can lead to new discoveries. 
 
-The availability of an open numerical laboratory for the study of turbulent flows has already had a major impact on turbulence research and education. 
+The availability of an open simulation laboratory for the study of turbulent flows has already had a major impact on turbulence research and education. 
 The JHTDB has over 150 registered users and queries have been made from over 1500 distinct ip addresses across the globe (Fig. \ref{fig:ip_map}).
-Data from the service have been used fully or partially in multiple research projects resulting in at least 40 peer-reviewed publications. The impact of the JHDTB has extended to the classroom as well. The laboratory has been used in various classes and student workshops 
+Data from the service have been used fully or partially in multiple research projects resulting in at least 40 peer-reviewed publications, including in
+high-profile venues such as Nature \cite{Eyink}, Proceedings of the National Academy of Sciences \cite{xu2014flight}, 
+and Physical Review Letters \cite{gustavsson2014tumbling, jucha2014time}. 
+The impact of the JHDTB has extended to the classroom as well. The laboratory has been used in various classes and student workshops 
 around the world (e.g. the ``Tutorial School on Fluid Dynamics: Topics in Turbulence" held at the University of Maryland College Park - 
 see http://www2.cscamm.umd.edu/programs/trb10/, to be repeated in the summer of 2015).
 
@@ -282,15 +287,14 @@ getThreshold and getVelocityGradient methods can be further analyzed depending o
 
 Many numerical simulations are canonical and have useful lifetimes of years or decades. Turbulence researchers have come to rely on the JHTDB to 
 provide such canonical datasets and new ideas are tested on the service routinely. The scientific results that have emerged span the full breadth of 
-turbulence research. For example, a generalization of previous models of turbulent dispersion was 
-first applied to JHTDB data by Benveniste et al. \cite{benveniste2014asymptotic}. Luethi et al. \cite{luethi2009expanding} have used the JHTDB to develop
-a better understanding of velocity gradient dynamics. Pumir et al. \cite{pumir2014redistribution} drew the
-conclusion that ``pressure forces tend, on average, to accelerate
-fast particles" by utilizing the the tools and data provided by the JHTDB. These are just a handful of the many examples showing the utility of the 
+turbulence research, from physical theory (e.g. turbulent dynamics of velocity gradients \cite{luethi2009expanding}), to engineering modeling 
+(e.g. large-eddy simulation of wall-bounded flows \cite{gungor2010new}), to development of experimental techniques 
+(e.g. particle-based measurements of very fine-scale flow structure \cite{lawson2014scanning}).
+These are just a handful of the many examples showing the utility of the 
 JHTDB and how it has enabled data-driven discovery.
 
 \section{Conclusion}
-We have described an open numerical laboratory for the study of turbulent phenomena, the JHTDB. It provides public access to high-quality turbulence 
+We have described an open simulation laboratory for the study of turbulent phenomena, the JHTDB. It provides public access to high-quality turbulence 
 numerical simulation data along with built-in analysis functionality. Scientists and the public as a whole can immerse sensors in the simulated flows, study
 their evolution or the flow parameters. This can and has been done from around the world by researches that don't have access to supercomputing facilities
 and/or large amounts of local storage and computational resources. The JHTDB is the manifestation of the ``remote immersive analysis" approach to 
