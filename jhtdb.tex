@@ -286,7 +286,7 @@ Web-service method) at each of these locations and computes and plots the vortic
 getThreshold and getVelocityGradient methods can be further analyzed depending on the particular needs of the user.
 
 Many numerical simulations are canonical and have useful lifetimes of years or decades. Turbulence researchers have come to rely on the JHTDB to 
-provide such canonical datasets and new ideas are tested on the service routinely. The scientific results that have emerged span the full breadth of 
+provide such canonical datasets and new ideas are tested in this laboratory routinely. The scientific results that have emerged span the full breadth of 
 turbulence research, from physical theory (e.g. turbulent dynamics of velocity gradients \cite{luethi2009expanding}), to engineering modeling 
 (e.g. large-eddy simulation of wall-bounded flows \cite{gungor2010new}), to development of experimental techniques 
 (e.g. particle-based measurements of very fine-scale flow structure \cite{lawson2014scanning}).
@@ -298,15 +298,21 @@ We have described an open simulation laboratory for the study of turbulent pheno
 numerical simulation data along with built-in analysis functionality. Scientists and the public as a whole can immerse sensors in the simulated flows, study
 their evolution or the flow parameters. This can and has been done from around the world by researches that don't have access to supercomputing facilities
 and/or large amounts of local storage and computational resources. The JHTDB is the manifestation of the ``remote immersive analysis" approach to 
-computational science.
+computational science. It democratizes supercomputing by bringing the benefits of simulation to the broader community of scientists, rather than the
+few top users that have allocations on supercomputers and the necessary sophistication to develop and run codes.
 
-In the future we plan on expanding the capabilities of the JHTDB through adding interactive visualization capabilities, custom server side computations and
-the ability	to generate and store derived datasets. Visualization software will run in server
+Our vision for the way forward is a tighter integration and coupling between numerical simulations and simulation laboratories. The in-situ analysis
+performed during the simulation will automatically generate a database to verify and repeat the analysis or to further examine the data. Conversely, 
+analysis queries to an existing database will launch simulations that refine the data or explore new science questions. This will require the creation of
+two-way connections between in-situ simulation analyses and archival databases with the goal of unifying simulation and analysis. 
+
+In the future we plan on expanding the capabilities of the JHTDB through the addition of interactive visualization capabilities, 
+custom server side computations and the ability to generate and store derived datasets. Visualization software will run in server
 mode on our servers and will allow remote client connections. We are also exploring Web interfaces for such visualization software, which will allow users
 to perform visualizations through a Web-browser. By integrating the JHTDB with existing technology developed for the Sloan Digital Sky Survey (SDSS), such
 as CasJob and MyDB \cite{LiThakar} we will be able to provide server-side storage for our users. The results of data-intensive computations and iterative 
-workflows can be stored in this server-side storage to be downloaded or interacted with later. This will also allow for the generation of derived datasets (e.g.
-filtered versions of the original datasets), which can then be used through the existing Web-services. This will also allow for interacting with the data in new
+workflows can be stored in this server-side storage to be downloaded or interacted with later. This will enable the generation of derived datasets (e.g.
+filtered versions of the original datasets), which can then be used through the existing Web-services. This will allow for interacting with the data in new
 and different ways.
 
 \vfill
