@@ -105,6 +105,13 @@ backward in time, repeat and refine experiments, tune the parameters of their an
 not even envisioned when the simulations were run. Additionally, an open simulation laboratory can be used for teaching and training the next generation 
 of researchers.
 
+{\color{red}The archival approach to numerical simulation data has several advantages when compared to hypothesis-driven simulation, in which a code is 
+run every time a new question emerges. It reduces the time from hypothesis to drawing conclusions. Analysis queries are executed against stored data and 
+in many cases have much smaller data and computation requirements when compared to an entire simulation. It enables data exploration. The same points 
+in space and time can be explored multiple times as intuition about the data develops. It provides for a seamless verification of experimental results. Analysis
+queries used to draw conclusions can be easily rerun and are guaranteed to produce the same results. At the same time there are almost no drawbacks 
+when an experiment fails and needs to be repeated with a different set of assumptions, initial conditions or different parameters.}
+
 The deployment of an open simulation laboratory for turbulence research has already transformed our understanding of turbulence and has allowed for new
 types of analysis to be performed in this environment. Particles immersed in the simulated flow can be tracked both forward an backward in time. 
 Ensembles of particles are evaluated together and the experiments can be repeated multiple times to achieve the required confidence in the results.
@@ -124,6 +131,12 @@ The JHTDB was designed to provide efficient yet flexible access to world-class h
 several years since its inception in 2007 some aspects of the architecture were modified, new analysis functionality was added and new ways of accessing
 the data were provided. We provide an overview of the architecture and summarize some of these developments here.
 
+\begin{figure}
+\includegraphics[width=0.6\textwidth]{jhtdb_diagram.pdf}
+\caption{Architecture of the JHTDB.}
+\label{fig:architecture}
+\end{figure}
+
 The JHTDB currently stores four datasets, which are the output of DNS of four types of turbulent flows. This includes: 
 \begin{itemize}
 \item a forced isotropic turbulence dataset on $1024^4$ space-time data points at a Taylor-scale Reynolds number of $Re_{\lambda} = 433$;
@@ -133,18 +146,12 @@ with $Re_{\lambda , u} = 186$  and $Re_{\lambda , b} = 144$ for the velocity and
 \item a variable-density mixing flow dataset on $1024^3$ spatial data points and 1015 time steps.
 \end{itemize}
 The total amount of space occupied by these datasets is over 200TB. The data are partitioned spatially and temporally across a cluster of relational
-databases. The database nodes are part of the 1.1PB GrayWulf cluster \cite{Szalay} and the 11PB DataScope cluster (http://idies.jhu.edu/datascope) at JHU.
+databases. The database nodes are part of the 1.1PB GrayWulf cluster and the 11PB DataScope cluster (http://idies.jhu.edu/datascope) at JHU.
 Each node runs Microsoft SQL Server and provides built-in analysis functionality, implemented as user-defined functions or stored procedures in the
 Common Language Runtime (CLR). The data and analysis functionality are accessible through a Web-server front end (http://turbulence.pha.jhu.edu), 
 which provides Web-services implemented using the SOAP protocol (Simple Object Access Protocol), a cutout service producing HDF5 files of the raw
 simulation data and a Web-query interface. Users can access the Web-services directly or through several client libraries, which we have provided, 
 including Matlab, C, Fortran and Python wrappers. The architecture of the JHTDB is shown in Figure \ref{fig:architecture}.
-
-\begin{figure}
-\includegraphics[width=0.6\textwidth]{jhtdb_diagram.pdf}
-\caption{Architecture of the JHTDB.}
-\label{fig:architecture}
-\end{figure}
 
 The analysis functions used in turbulence research are data-intensive, they operate over collections of points and to compute the result at each target point
 they access a large number of neighboring data points. Some functions are also data-reducing, they evaluate or compute over a large number of data
@@ -205,6 +212,14 @@ This is because the access is limited by I/O and the transfer of results to the 
 The filtering computation introduces a small overhead mainly due to the fact that the data have to be converted
 from binary to single precious floating point format to perform the filtering computations.
 
+\begin{figure*}
+\centering
+\subfigure[Number of queries]{\includegraphics[width=0.49\textwidth]{jhtdb_queries.pdf}\label{fig:queries}}
+\subfigure[Number of data points queried]{\includegraphics[width=0.49\textwidth]{jhtdb_usage.pdf}\label{fig:points_queried}}
+\caption{Semi-log plot of the number of queries and number of data points queried from the JHTDB per year.}
+\label{fig:usage}
+\end{figure*}
+
 The evaluation of all queries submitted to the JHTDB is distributed across the nodes of the database cluster and we create multiple connections to each
 node in order to exploit the nodes' multicore architecture. The Web-server handling a user request acts as a mediator. It distributes the input across the
 database nodes based on the spatial and temporal partitioning of the data and initiates the processing on each node asynchronously. The partial-sum
@@ -215,14 +230,6 @@ Thus, the threshold query result cache is also distributed across the database n
 
 \section{Impact of the JHTDB}
 
-\begin{figure*}
-\centering
-\subfigure[Number of queries]{\includegraphics[width=0.49\textwidth]{jhtdb_queries.pdf}\label{fig:queries}}
-\subfigure[Number of data points queried]{\includegraphics[width=0.49\textwidth]{jhtdb_usage.pdf}\label{fig:points_queried}}
-\caption{Semi-log plot of the number of queries and number of data points queried from the JHTDB per year.}
-\label{fig:usage}
-\end{figure*}
-
 As of the writing of this article the JHTDB has served queries to nearly 12 trillion data points. This serves as a testament to the demand for such high-quality
 data and their potential for reusability. Each of the four datasets stored in the JHTDB currently has on the order of a trillion space-time data points. Storing
 these data in an open simulation laboratory preserves the computational effort used to generate them, allows for repeatability of experiments and 
@@ -231,15 +238,6 @@ time produces the same exact data, but users can look at it from different angle
 complicated quantities. 
 This builds physical intuition about the nonlinear dynamics of the complex flow phenomena and can lead to new discoveries. 
 
-The availability of an open simulation laboratory for the study of turbulent flows has already had a major impact on turbulence research and education. 
-The JHTDB has over 150 registered users and queries have been made from over 1500 distinct ip addresses across the globe (Fig. \ref{fig:ip_map}).
-Data from the service have been used fully or partially in multiple research projects resulting in at least 40 peer-reviewed publications, including in
-high-profile venues such as Nature \cite{Eyink}, Proceedings of the National Academy of Sciences \cite{xu2014flight}, 
-and Physical Review Letters \cite{gustavsson2014tumbling, jucha2014time}. 
-The impact of the JHDTB has extended to the classroom as well. The laboratory has been used in various classes and student workshops 
-around the world (e.g. the ``Tutorial School on Fluid Dynamics: Topics in Turbulence" held at the University of Maryland College Park - 
-see http://www2.cscamm.umd.edu/programs/trb10/, to be repeated in the summer of 2015).
-
 \begin{figure*}
 \centering
 \subfigure[Percentage of queries per query type]{\includegraphics[width=0.49\textwidth]{jhtdb_query_types.pdf}\label{fig:queries_per_type}}
@@ -247,6 +245,15 @@ see http://www2.cscamm.umd.edu/programs/trb10/, to be repeated in the summer of 
 \caption{Distribution of JHTDB queries and number of data points queried per query type.}
 \label{fig:query_types}
 \end{figure*}
+
+The availability of an open simulation laboratory for the study of turbulent flows has already had a major impact on turbulence research and education. 
+The JHTDB has over 150 registered users and queries have been made from over 1500 distinct ip addresses across the globe (Fig. \ref{fig:ip_map}).
+Data from the service have been used fully or partially in multiple research projects resulting in at least 40 peer-reviewed publications, including in
+high-profile venues such as Nature \cite{Eyink}, Proceedings of the National Academy of Sciences \cite{xu2014flight}, 
+and Physical Review Letters \cite{jucha2014time}. 
+The impact of the JHDTB has extended to the classroom as well. The laboratory has been used in various classes and student workshops 
+around the world (e.g. the ``Tutorial School on Fluid Dynamics: Topics in Turbulence" held at the University of Maryland College Park - 
+see http://www2.cscamm.umd.edu/programs/trb10/, to be repeated in the summer of 2015).
 
 JHTDB usage has grown steadily over the years with the addition of new datasets and expanded capabilities and performance. Figure \ref{fig:points_queried}
 shows the total number of points queried per year since the JHTDB's inception in 2007 and the total number of queries submitted is shown in Figure
@@ -305,6 +312,10 @@ Our vision for the way forward is a tighter integration and coupling between num
 performed during the simulation will automatically generate a database to verify and repeat the analysis or to further examine the data. Conversely, 
 analysis queries to an existing database will launch simulations that refine the data or explore new science questions. This will require the creation of
 two-way connections between in-situ simulation analyses and archival databases with the goal of unifying simulation and analysis. 
+{\color{red}In this way a tradeoff between computation and storage can be leveraged. Not all simulations need to be archived, while landmark simulations 
+can be preserved in large parts until they become obsolete and the storage needs to be reclaimed for the next landmark simulation. At the same time
+if the output of a simulation is larger than the available storage it can be stored at a lower resolution, where regions of interest can be refined or re-simulated
+on-demand subsequently. Analysis queries can execute against the stored data, launch a new computation or a combination of the two.}
 
 In the future we plan on expanding the capabilities of the JHTDB through the addition of interactive visualization capabilities, 
 custom server side computations and the ability to generate and store derived datasets. Visualization software will run in server
@@ -315,9 +326,8 @@ workflows can be stored in this server-side storage to be downloaded or interact
 filtered versions of the original datasets), which can then be used through the existing Web-services. This will allow for interacting with the data in new
 and different ways.
 
-\vfill
-\newpage
- 
+%\vfill
+%\newpage
 \bibliography{jhtdb}
 \vfill
 
