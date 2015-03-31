@@ -119,7 +119,7 @@ Ensembles of particles are evaluated together and the experiments can be repeate
 Analysis of this type was carried out in magnetohydrodynamics (MHD), where stochastic trajectories arriving at a point $(x, t)$ were traced backward in 
 time to the initial time, $t_0$ and the magnetic field was then transported forward along the trajectories to the point $(x, t)$. This numerical experiment has
 revealed why magnetic field-lines in solar flares break and reconnect in as little as 15 minutes as opposed to the millions of years predicted by classical 
-theory \cite{Eyink}.
+theory \cite{Eyink}. {\color{red}The original numerical simulation was performed years ago to explore an unrelated hypothesis!}
 
 The great advances in computing capabilities of the recent past have led to scientific datasets of unprecedented size. The standard DNS of turbulent flows
 produce datasets that are 10s to 100s of terabytes, while leading-edge simulations have already crossed the petabyte threshold \cite{Lee}. The rate at
@@ -158,7 +158,7 @@ The analysis functions used in turbulence research are data-intensive, they oper
 they access a large number of neighboring data points. Some functions are also data-reducing, they evaluate or compute over a large number of data
 points, but produce smaller result sets. These types of computations are much more efficiently executed on the servers near the data. Large amounts of data
 do not have to be moved across the network and the computations can be evaluated in a distributed manner across the nodes of the cluster. However, the
-functionality provided to the users should also be general enough to allow for different types of analysis and customization of experimental parameters.
+functionality provided to users should also be general enough to allow for different types of analysis and customization of experimental parameters.
 With these considerations in mind, we have developed Web-services methods that evaluate simulation parameters on a set of target locations. Users of 
 the JHTDB can request the following:
 \begin{itemize}
@@ -289,7 +289,7 @@ We term this approach to computational science ``remote immersive analysis".
 Figure \ref{fig:vorticity} shows an example of the remote immersive analysis approach to computational turbulence. The user extracts all locations within the
 region of interest where the magnitude of the vorticity is above a prescribed threshold (65.0 in the example) from the isotropic turbulence dataset (making 
 a call to the getThreshold Web-service method). He or she then generates a 2D planar patch with the location of maximum vorticity in the center and places
-``virtual sensors" at each location using the dataset's gird spacing. He or she then requests the velocity gradient (making a call to the getVelocityGradient
+``virtual sensors" at each location using the dataset's grid spacing. He or she then requests the velocity gradient (making a call to the getVelocityGradient
 Web-service method) at each of these locations and computes and plots the vorticity magnitude to yield the visualization shown. The results of the 
 getThreshold and getVelocityGradient methods can be further analyzed depending on the particular needs of the user.
 
@@ -304,7 +304,7 @@ JHTDB and how it has enabled data-driven discovery.
 \section{Conclusion}
 We have described an open simulation laboratory for the study of turbulent phenomena, the JHTDB. It provides public access to high-quality turbulence 
 numerical simulation data along with built-in analysis functionality. Scientists and the public as a whole can immerse sensors in the simulated flows, study
-their evolution or the flow parameters. This can and has been done from around the world by researches that don't have access to supercomputing facilities
+their evolution or the flow parameters. This can and has been done from around the world by researchers that don't have access to supercomputing facilities
 and/or large amounts of local storage and computational resources. The JHTDB is the manifestation of the ``remote immersive analysis" approach to 
 computational science. It democratizes supercomputing by bringing the benefits of simulation to the broader community of scientists, rather than the
 few top users that have allocations on supercomputers and the necessary sophistication to develop and run codes.
